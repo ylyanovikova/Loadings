@@ -1,0 +1,335 @@
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+
+//style
+const commonStyle = {
+    margin: 'auto',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0
+  };
+  
+  const sizeItem = {
+    small: '10px',
+    default: '12px',
+    large: '14px'
+  }
+  
+  const sizeContainer = {
+    small: '24px',
+    default: '30px',
+    large: '36px'
+  }
+  
+  const borderRadiusContainerSize = {
+    small: '12px',
+    default: '15px',
+    large: '18px'
+  }
+  
+
+//boxesLoading
+const rollOne = keyframes`
+  0%,
+  20% {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(180deg);
+    opacity: 1;
+  }
+  60%,
+  70% {
+    transform: rotate(180deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(180deg);
+    opacity: 0;
+  }
+`;
+
+const rollTwo = keyframes`
+  0%,
+  50% {
+    transform: rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  51% {
+    transform: rotate(0deg) translateX(0);
+    opacity: 1;
+  }
+  70% {
+    transform: rotate(0deg) translateX(-100%);
+    opacity: 1;
+  }
+  90% {
+    transform: rotate(180deg) translateX(-100%);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(180deg) translateX(-100%);
+    opacity: 1;
+  }
+`;
+
+const moveLeft = keyframes`
+  0%,
+  51% {
+    transform: translateX(0);
+  }
+  70% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+`
+
+
+const LoadContainer = styled.div`
+  width: ${props => sizeContainer[props.size] || sizeContainer['default'] };
+  height: ${props => sizeContainer[props.size] || sizeContainer['default'] };
+  position: relative;
+  /* overflow: hidden; */
+`;
+
+const RollBoxOne = styled.div`
+  width: ${props => sizeItem[props.size] || sizeItem[props.size] };
+  height: ${props => sizeItem[props.size] || sizeItem[props.size] };
+  background-color: ${props => props.color || '#00adb5'};
+  animation: ${rollOne} ${props => props.speed || 3}s ease infinite;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform-origin: right top;
+`
+
+const RollBoxTwo = styled.div`
+  width: ${props => sizeItem[props.size] || sizeItem[props.size] };
+  height: ${props => sizeItem[props.size] || sizeItem[props.size] };
+  background-color: ${props => props.color || '#00adb5'};
+  animation: ${rollTwo} ${props => props.speed || 3}s ease infinite;
+  position: absolute;
+  left: ${props => sizeItem[props.size] || sizeItem[props.size] };
+  bottom: ${props => sizeItem[props.size] || sizeItem[props.size] };
+  transform-origin: left bottom;
+`
+
+const RollBoxMove = styled.div`
+  width: ${props => sizeItem[props.size] || sizeItem[props.size] };
+  height: ${props => sizeItem[props.size] || sizeItem[props.size] };
+  background-color: ${props => props.color || '#00adb5'};
+  animation: ${moveLeft} ${props => props.speed || 3}s ease infinite;
+  position: absolute;
+  left: ${props => sizeItem[props.size] || sizeItem[props.size] };
+  bottom: 0;
+`
+
+const Loading = ({ style = commonStyle, color, speed, size = 'default'}) => {
+  return (
+    <LoadContainer style={style} size={size}>
+      <RollBoxOne size={size} color={color} speed={speed}/>
+      <RollBoxTwo size={size} color={color} speed={speed}/>
+      <RollBoxMove size={size} color={color} speed={speed}/>
+    </LoadContainer>
+  );
+};
+
+
+
+//circlesLoading
+// const animate1 = keyframes`
+// 	100% {
+// 	transform:rotate(360deg)
+// }
+// `;
+
+// const animate2 = keyframes`
+// 	0%,100% {
+// 	transform:scale(0)
+// }
+// 50% {
+// 	transform:scale(1)
+// }
+// `;
+
+// const LoadingContainer = styled.div`
+//   position: relative;
+//   width: 45px;
+//   height: 45px;
+//   margin: 0 auto;
+//   animation: ${animate1} 2s linear infinite;
+// `;
+
+// const Item = styled.div`
+// 	position:absolute;
+// 	top:0;
+// 	width:25px;
+// 	height:25px;
+// 	border-radius:100%;
+// 	background-color: ${props => props.color || '#00adb5'};
+//   animation: ${animate2} ${props => props.speed || 2}s ease-in-out infinite;
+// `;
+
+// const ItemOne = styled(Item)``;
+
+// const ItemTwo = styled(Item)`
+//   animation-delay: -${props => props.speed  / 2 || 1}s;
+//   top:auto;
+// 	bottom:0;
+// `;
+
+// const Loading = ({ style = commonStyle, color, speed, size = 'default' }) => {
+//   return (
+//     <LoadingContainer style={style}>
+//       <ItemOne color={color} speed={speed} />
+//       <ItemTwo color={color} speed={speed} />
+//     </LoadingContainer>
+//   );
+// };
+
+
+
+//squareLoading
+// const animate = keyframes`
+//   50% {
+//     transform: rotateY(-180deg);
+//   }
+//   100% {
+//     transform: rotateY(-180deg) rotateX(-180deg);
+//   }
+// `;
+
+// const LoadingContainer = styled.div`
+//   perspective: 120px;
+//   width: 120px;
+//   height: 120px;
+//   position: relative;
+// `;
+
+// const Item = styled.div`
+//   margin: auto;
+//   position: absolute;
+//   left: 0;
+//   right: 0;
+//   top: 0;
+//   bottom: 0;
+//   width: ${props => sizeContainer[props.size] || sizeContainer['default']};
+//   height: ${props => sizeContainer[props.size] || sizeContainer['default']};
+//   transform: rotate(0);
+//   background: ${props => props.color || '#00adb5'};
+//   animation: ${animate} ${props => props.speed || 1}s infinite;
+// `;
+
+// const Loading = ({ style = commonStyle, color, speed, size="default" }) => {
+//   return (
+//     <LoadingContainer style={style}>
+//       <Item color={color} speed={speed} size={size} />
+//     </LoadingContainer>
+//   );
+// };
+
+
+//3circles
+// const animate = keyframes`
+//   from {
+//     opacity: 1;
+//   }
+//   to {
+//     opacity: 0;
+//   }
+// `;
+
+// const LoadingContainer = styled.div`
+//   width: 60px;
+//   height: 60px;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   flex-flow: nowrap;
+// `;
+
+// const Item = styled.div`
+//   width: ${props => sizeItem[props.size]  || sizeItem['default']};
+//   height: ${props => sizeItem[props.size] || sizeItem['default']};
+//   border-radius: 50%;
+//   background: ${props => props.color || '#00adb5'};
+//   animation: ${animate} ${props => props.speed || 0.8}s ease-in-out alternate infinite;
+// `;
+
+// const ItemFirst = styled(Item)`
+//   animation-delay: -${props => props.speed / 2 || 0.4}s;
+// `;
+
+// const ItemTwo = styled(Item)`
+//   animation-delay:  -${props => props.speed / 4 || 0.2}s;
+// `;
+
+// const Loading = ({ style = commonStyle, color, speed, size="default" }) => {
+//   return (
+//     <LoadingContainer style={style}>
+//       <ItemFirst color={color} speed={speed} size={size} />
+//       <ItemTwo color={color} speed={speed}  size={size} />
+//       <Item color={color} speed={speed}  size={size} />
+//     </LoadingContainer>
+//   );
+// };
+
+
+//jumpongCircleLoading
+// const bounce = keyframes`
+//   0% {
+//     transform: translateY(0) scaleX(1.2) scaleY(0.8);
+//   }
+//   25% {
+//     transform: translateY(-10px) scaleX(1) scaleY(1);
+//   }
+//   100% {
+//     background-color: #f9c094;
+//     transform: translateY(-40px);
+//   }
+// `;
+
+// const LoadContainer = styled.div`
+//   width: ${props => sizeContainer[props.size] || sizeContainer['default'] };
+//   height: ${props => sizeContainer[props.size] || sizeContainer['default'] };
+//   position: relative;
+//   /* overflow: hidden; */
+//   display: flex;
+//   justify-content: center;
+//   align-items: flex-end;
+// `;
+
+// const Circle = styled.div`
+//   width: ${props => sizeItem[props.size] || sizeItem['default'] };
+//   height: ${props => sizeItem[props.size] || sizeItem['default'] };
+//   border-radius: 50%;
+//   background-color: ${props => props.color || '#00adb5' };
+//   animation: ${bounce} ${props => props.speed || 0.5}s ease-out infinite alternate;
+// `;
+
+// const BottomReac = styled.div`
+//   width: ${props => sizeContainer[props.size] || sizeContainer['default'] };
+//   height: 4px;
+//   position: absolute;
+//   bottom: 0;
+//   left: 0;
+//   background-color: ${props => props.color || '#00adb5' };
+// `
+
+
+// const Loading = ({ style = commonStyle, color, speed, size = 'default'}) => {
+//   return (
+//     <LoadContainer style={style} size={size}>
+//       <Circle color={color} speed={speed} size={size}/>
+//       <BottomReac color={color} size={size}/>
+//     </LoadContainer>
+//   );
+// };
+
+
+export {Loading}
